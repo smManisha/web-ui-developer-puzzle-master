@@ -21,7 +21,7 @@ export class BookSearchComponent implements OnInit {
   searchForm = this.fb.group({
     term: ''
   });
-
+  
   constructor(
     private readonly store: Store,
     private readonly fb: FormBuilder
@@ -30,13 +30,26 @@ export class BookSearchComponent implements OnInit {
   get searchTerm(): string {
     return this.searchForm.value.term;
   }
+  private _text;
 
   ngOnInit(): void {
     this.store.select(getAllBooks).subscribe(books => {
       this.books = books;
     });
+    this.text ='';
   }
 
+  get text(){
+    return this._text
+  }
+
+  // setter function, called whenever the value is set
+  set text(text){
+    if(text !==''){
+      this.store.dispatch(searchBooks({ term: text }));
+    }
+    this._text = text
+  }
   formatDate(date: void | string) {
     return date
       ? new Intl.DateTimeFormat('en-US').format(new Date(date))
