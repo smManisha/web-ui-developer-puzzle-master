@@ -9,7 +9,6 @@
         {{ b.authors.join(',') }}
       </div>
     </div>
-    <div>
       <button
         mat-icon-button
         color="warn"
@@ -18,7 +17,26 @@
       >
         <mat-icon>remove_circle</mat-icon>
       </button>
-    </div>
+       <button
+      mat-icon-button
+      color="warn"
+      [attr.aria-label]="'Remove ' + b.title + ' from reading list'"
+      (click)="markBookAsFinished(b)"
+      [ngStyle]="{'color':b.finished === true ? 'grey' : 'green' }"
+    >
+      <mat-icon >check_circle</mat-icon>
+    </button>
+      <!-- <span>
+      <button
+      mat-icon-button
+      color="warn"
+      [attr.aria-label]="'Remove ' + b.title + ' from reading list'"
+      (click)="markBookAsFinished(b)"
+      [ngStyle]="{'color':b.finished === true ? 'grey' : 'green' }"
+    >
+      <mat-icon >check_circle</mat-icon>
+    </button>
+  </span> -->
   </div>
 </ng-container>
 <ng-template #empty>
