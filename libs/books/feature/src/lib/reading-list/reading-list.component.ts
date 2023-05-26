@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { getReadingList, removeFromReadingList, addToReadingList } from '@tmo/books/data-access';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Book } from '@tmo/shared/models';
+
 @Component({
   selector: 'tmo-reading-list',
   templateUrl: './reading-list.component.html',
@@ -10,6 +11,8 @@ import { Book } from '@tmo/shared/models';
 })
 export class ReadingListComponent {
   readingList$ = this.store.select(getReadingList);
+  flag:false;
+  
 
   constructor(
     private readonly store: Store,
@@ -25,5 +28,8 @@ export class ReadingListComponent {
     snackBarRef.onAction().subscribe(() => {
       this.store.dispatch(addToReadingList({ book }));
    });
+  }
+  markBookAsFinished(item) {
+    this.store.dispatch(markFromReadingList({ item }));
   }
 }
