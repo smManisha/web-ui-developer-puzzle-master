@@ -45,3 +45,8 @@
   font-size: 1rem;
   color: $gray60;
 }
+
+.aligned-icon { 
+  display: flex;
+  flex-direction: column;
+}
