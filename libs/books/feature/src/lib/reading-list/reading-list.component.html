@@ -6,7 +6,7 @@
     <div class="reading-list-item--details">
       <strong class="reading-list-item--details--title">{{ b.title }}</strong>
       <div class="reading-list-item--details--author">
-        {{ b.authors.join(',') }}
+        {{ b.authors?.join(',') }}
       </div>
     </div>
       <button
@@ -15,28 +15,18 @@
         [attr.aria-label]="'Remove ' + b.title + ' from reading list'"
         (click)="removeFromReadingList(b)"
       >
-        <mat-icon>remove_circle</mat-icon>
+        <mat-icon *ngIf="(readingList$ | async).length">remove_circle</mat-icon>
       </button>
-       <button
-      mat-icon-button
-      color="warn"
-      [attr.aria-label]="'Remove ' + b.title + ' from reading list'"
-      (click)="markBookAsFinished(b)"
-      [ngStyle]="{'color':b.finished === true ? 'grey' : 'green' }"
-    >
-      <mat-icon >check_circle</mat-icon>
-    </button>
-      <!-- <span>
       <button
       mat-icon-button
       color="warn"
+      [disabled]="b.finished === false" 
       [attr.aria-label]="'Remove ' + b.title + ' from reading list'"
       (click)="markBookAsFinished(b)"
       [ngStyle]="{'color':b.finished === true ? 'grey' : 'green' }"
     >
       <mat-icon >check_circle</mat-icon>
     </button>
-  </span> -->
   </div>
 </ng-container>
 <ng-template #empty>
